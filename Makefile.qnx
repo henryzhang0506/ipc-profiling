@@ -1,0 +1,9 @@
+ALL: pub sub
+
+pub:
+	q++ -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp
+sub:
+	q++ -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp
+
+clean:
+	rm -rf pub sub
