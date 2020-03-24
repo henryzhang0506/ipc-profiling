@@ -70,7 +70,6 @@ int main(int argc, char** argv) {
   int sub_pid;
   f >> sub_pid;
   
-  printf("Got subscriber pid: %d\n", sub_pid);
   int data_size = atoi(*(argv + 1));
   uint8_t* data = create_tmp_data(data_size);
 

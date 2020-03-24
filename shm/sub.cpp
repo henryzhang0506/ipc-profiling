@@ -20,7 +20,7 @@ double sum = 0.0;
 
 void handler_calculate(int signum) {
   if (signum == SIGUSR1) {
-    printf("========= mean transport time for size(%d) is: %lf ms =========\n", data_size,
+    printf("========= SHM mean transport time for size(%d) is: %lf ms =========\n", data_size,
            sum / round);
     exit(1);
   }
