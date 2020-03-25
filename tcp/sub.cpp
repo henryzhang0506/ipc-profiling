@@ -25,10 +25,10 @@ int main(int argc, char const *argv[]) {
   }
 
   // Forcefully attaching socket to the port 8080
-  if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
-    perror("setsockopt");
-    exit(EXIT_FAILURE);
-  }
+  //if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+  //  perror("setsockopt");
+  //  exit(EXIT_FAILURE);
+  //}
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
   address.sin_port = htons(PORT);
@@ -53,7 +53,7 @@ int main(int argc, char const *argv[]) {
     char *buf = new char[data_size];
     int i = 0, count = 0;
     while (i < data_size) {
-      count = read(new_socket, buf, data_size);
+      count = read(new_socket, buf+i, data_size-i);
       i += count;
     }
     double end_time = get_wall_time();

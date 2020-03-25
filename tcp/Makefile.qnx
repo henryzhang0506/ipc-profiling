@@ -1,9 +1,9 @@
 ALL: pub sub
 
 pub:
-	q++ -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp
+	q++ -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp -lsocket
 sub:
-	q++ -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp
+	q++ -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp -lsocket
 
 clean:
 	rm pub sub

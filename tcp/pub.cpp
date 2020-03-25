@@ -53,7 +53,7 @@ int main(int argc, char const* argv[]) {
     int count = 0;
     int i = 0;
     while (i < data_size) {
-      count = write(sock, data, data_size);
+      count = write(sock, data+i, data_size-i);
       i += count;
     }
   }
