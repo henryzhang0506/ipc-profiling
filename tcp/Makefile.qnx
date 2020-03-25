@@ -1,9 +1,12 @@
 ALL: pub sub
 
+.PHONY:pub
 pub:
 	q++ -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp -lsocket
+.PHONY:sub
 sub:
 	q++ -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp -lsocket
 
+.PHONY:clean
 clean:
 	rm pub sub
