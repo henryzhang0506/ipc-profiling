@@ -1,4 +1,3 @@
-// Client side C/C++ program to demonstrate Socket programming
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,10 +23,8 @@ int main(int argc, char const* argv[]) {
     return 1;
   }
   int data_size = atoi(*(argv + 1));
-  printf("data_size is: %d\n", data_size);
-  int sock = 0, valread;
+  int sock = 0;
   struct sockaddr_in serv_addr;
-  char buffer[1024] = {0};
   if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
     printf("\n Socket creation error \n");
     return -1;
@@ -46,6 +43,8 @@ int main(int argc, char const* argv[]) {
     return -1;
   }
   for (int r = 0; r < ROUND; ++r) {
+    // time in allocating memory not included
+    printf("Round: %d\n", r);
     uint8_t* data = create_tmp_data(data_size);
     double current_time = get_wall_time();
     write(sock, &current_time, sizeof(double));
@@ -53,9 +52,10 @@ int main(int argc, char const* argv[]) {
     int count = 0;
     int i = 0;
     while (i < data_size) {
-      count = write(sock, data+i, data_size-i);
+      count = write(sock, data + i, data_size - i);
       i += count;
     }
+    delete[] data;
   }
 
   return 0;
