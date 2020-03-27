@@ -14,4 +14,4 @@ sleep 1
 
 ./pub $1
 
-tail -n1 ${OUT_FILE}
+grep "========" ${OUT_FILE}
