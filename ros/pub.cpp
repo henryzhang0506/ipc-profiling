@@ -45,8 +45,8 @@ int main(int argc, char** argv) {
     perf_pub.publish(msg);
     // fprintf(stderr, "Published message!\n");
     round += 1;
-    // If transport time larger than 1s, then can not use this to measure one e2e overhead
-    usleep(100000);
+    // If transport time larger than 500ms, then can not use this to measure one e2e overhead
+    usleep(500000);
   }
   return 0;
 }

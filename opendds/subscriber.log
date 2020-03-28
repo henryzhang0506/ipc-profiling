@@ -1,0 +1,72 @@
+(15350|15350) NOTICE: not using file configuration - no configuration file specified.
+(15350|15350) NOTICE: Service_Participant::intializeScheduling() - no scheduling policy specified, not setting policy.
+(15350|15350) Service_Participant::set_repo_ior: Repo[ DEFAULT_REPO] == file://repo.ior
+(15350|15350) [repository/DEFAULT_REPO]: RepositoryIor == file://repo.ior
+(15350|15350) Service_Participant::get_discovery: returning default repository for domain 42.
+TAO (15350|15350) - Did not find default svc.conf
+TAO (15350|15350) - Completed initializing the process-wide service context
+TAO (15350|15350) - Default ORB services initialization begins
+TAO (15350|15350) - ORBInitializer_Registry::register_orb_initializer 0 @0xdccf20
+TAO (15350|15350) - ORBInitializer_Registry::register_orb_initializer 1 @0xdcc4f0
+TAO (15350|15350) - Default ORB services initialization completed
+TAO (15350|15350) - We are the default ORB ...
+TAO (15350|15350) - Initializing the orb-specific services
+TAO (15350|15350) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (15350|15350) - Default_Resource_Factory - codeset manager=0xdf1960
+TAO (15350|15350) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (15350|15350) - UTF16_BOM_Translator: forceBE 0
+TAO (15350|15350) - Loaded default protocol <IIOP_Factory>
+TAO (15350|15350) - Created new ORB <OpenDDS_DCPS>
+TAO (15350|15350) - IIOP_Acceptor::open_i, listening on: <bogon:44601>
+TAO (15350|15350) - IIOP_Acceptor::open_i, listening on: <bogon:44601>
+TAO (15350|15350) - IIOP_Acceptor::open_i, listening on: <bogon:44601>
+TAO (15350|15350) - Stub::base_profiles, acquired profile lock this = 0xe0b8c0
+TAO (15350|15350) - Invocation_Adapter::invoke_i, making a TAO_CS_REMOTE_STRATEGY invocation
+TAO (15350|15350) - IIOP connection failed.
+     This is most likely due to a hostname lookup failure.
+TAO (15350|15350) - Stub::next_profile_retry, acquired profile lock this = 0xe0b8c0
+(15350|15350) EXCEPTION, ERROR: InfoRepoDiscovery::add_domain_participant: 
+system exception, ID 'IDL:omg.org/CORBA/TRANSIENT:1.0'
+OMG minor code (2), described as 'No usable profile in IOR.', completed = NO
+
+(15350|15350) ERROR: DomainParticipantImpl::enable, add_domain_participant returned invalid id.
+(15350|15350) ERROR: DomainParticipantFactoryImpl::create_participant, unable to enable DomainParticipant.
+ERROR: Subscriber.cpp:46: main() - create_participant failed!
+ 21:22:09.056115 (15350|15350) DomainParticipantFactoryImpl::~DomainParticipantFactoryImpl()
+ 21:22:09.057947 (15350|15350) Service_Participant::~Service_Participant()
+(16200|16200) NOTICE: not using file configuration - no configuration file specified.
+(16200|16200) NOTICE: Service_Participant::intializeScheduling() - no scheduling policy specified, not setting policy.
+(16200|16200) Service_Participant::set_repo_ior: Repo[ DEFAULT_REPO] == file://repo.ior
+(16200|16200) [repository/DEFAULT_REPO]: RepositoryIor == file://repo.ior
+(16200|16200) Service_Participant::get_discovery: returning default repository for domain 42.
+TAO (16200|16200) - Did not find default svc.conf
+TAO (16200|16200) - Completed initializing the process-wide service context
+TAO (16200|16200) - Default ORB services initialization begins
+TAO (16200|16200) - ORBInitializer_Registry::register_orb_initializer 0 @0x1fd8f20
+TAO (16200|16200) - ORBInitializer_Registry::register_orb_initializer 1 @0x1fd84f0
+TAO (16200|16200) - Default ORB services initialization completed
+TAO (16200|16200) - We are the default ORB ...
+TAO (16200|16200) - Initializing the orb-specific services
+TAO (16200|16200) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (16200|16200) - Default_Resource_Factory - codeset manager=0x1ffd960
+TAO (16200|16200) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (16200|16200) - UTF16_BOM_Translator: forceBE 0
+TAO (16200|16200) - Loaded default protocol <IIOP_Factory>
+TAO (16200|16200) - Created new ORB <OpenDDS_DCPS>
+TAO (16200|16200) - IIOP_Acceptor::open_i, listening on: <bogon:46285>
+TAO (16200|16200) - IIOP_Acceptor::open_i, listening on: <bogon:46285>
+TAO (16200|16200) - IIOP_Acceptor::open_i, listening on: <bogon:46285>
+TAO (16200|16200) - Stub::base_profiles, acquired profile lock this = 0x20178c0
+TAO (16200|16200) - Invocation_Adapter::invoke_i, making a TAO_CS_REMOTE_STRATEGY invocation
+TAO (16200|16200) - IIOP connection failed.
+     This is most likely due to a hostname lookup failure.
+TAO (16200|16200) - Stub::next_profile_retry, acquired profile lock this = 0x20178c0
+(16200|16200) EXCEPTION, ERROR: InfoRepoDiscovery::add_domain_participant: 
+system exception, ID 'IDL:omg.org/CORBA/TRANSIENT:1.0'
+OMG minor code (2), described as 'No usable profile in IOR.', completed = NO
+
+(16200|16200) ERROR: DomainParticipantImpl::enable, add_domain_participant returned invalid id.
+(16200|16200) ERROR: DomainParticipantFactoryImpl::create_participant, unable to enable DomainParticipant.
+ERROR: Subscriber.cpp:46: main() - create_participant failed!
+ 21:25:24.800431 (16200|16200) DomainParticipantFactoryImpl::~DomainParticipantFactoryImpl()
+ 21:25:24.802339 (16200|16200) Service_Participant::~Service_Participant()

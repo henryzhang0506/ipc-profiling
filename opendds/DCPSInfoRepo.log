@@ -1,0 +1,150 @@
+TAO (12979|12979) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (12979|12979) - Default_Resource_Factory - codeset manager=0x6cd930
+TAO (12979|12979) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (12979|12979) - UTF16_BOM_Translator: forceBE 0
+TAO (12979|12979) - Loaded default protocol <IIOP_Factory>
+TAO (12979|12979) - Created new ORB <>
+TAO (12979|12979) - IIOP_Acceptor::open_i, listening on: <bogon:43367>
+TAO (12979|12979) - IIOP_Acceptor::open_i, listening on: <bogon:43367>
+TAO (12979|12979) - IIOP_Acceptor::open_i, listening on: <bogon:43367>
+TAO (12979|12979) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (12979|12979) - Stub::base_profiles, acquired profile lock this = 0x6f9880
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (12979|12979) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (12979|12979) - Destroying ORB <>
+TAO (28396|28396) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (28396|28396) - Default_Resource_Factory - codeset manager=0x1078930
+TAO (28396|28396) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (28396|28396) - UTF16_BOM_Translator: forceBE 0
+TAO (28396|28396) - Loaded default protocol <IIOP_Factory>
+TAO (28396|28396) - Created new ORB <>
+TAO (28396|28396) - IIOP_Acceptor::open_i, listening on: <bogon:41079>
+TAO (28396|28396) - IIOP_Acceptor::open_i, listening on: <bogon:41079>
+TAO (28396|28396) - IIOP_Acceptor::open_i, listening on: <bogon:41079>
+TAO (28396|28396) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (28396|28396) - Stub::base_profiles, acquired profile lock this = 0x10a4880
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (28396|28396) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (28396|28396) - Destroying ORB <>
+TAO (937|937) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (937|937) - Default_Resource_Factory - codeset manager=0x67d920
+TAO (937|937) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (937|937) - UTF16_BOM_Translator: forceBE 0
+TAO (937|937) - Loaded default protocol <IIOP_Factory>
+TAO (937|937) - Created new ORB <>
+TAO (937|937) - IIOP_Acceptor::open_i, listening on: <bogon:35065>
+TAO (937|937) - IIOP_Acceptor::open_i, listening on: <bogon:35065>
+TAO (937|937) - IIOP_Acceptor::open_i, listening on: <bogon:35065>
+TAO (937|937) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (937|937) - Stub::base_profiles, acquired profile lock this = 0x6a9870
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (937|937) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (937|937) - Destroying ORB <>
+TAO (1689|1689) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (1689|1689) - Default_Resource_Factory - codeset manager=0x79b920
+TAO (1689|1689) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (1689|1689) - UTF16_BOM_Translator: forceBE 0
+TAO (1689|1689) - Loaded default protocol <IIOP_Factory>
+TAO (1689|1689) - Created new ORB <>
+TAO (1689|1689) - IIOP_Acceptor::open_i, listening on: <bogon:38735>
+TAO (1689|1689) - IIOP_Acceptor::open_i, listening on: <bogon:38735>
+TAO (1689|1689) - IIOP_Acceptor::open_i, listening on: <bogon:38735>
+TAO (1689|1689) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (1689|1689) - Stub::base_profiles, acquired profile lock this = 0x7c7870
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (1689|1689) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (1689|1689) - Destroying ORB <>
+TAO (2667|2667) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (2667|2667) - Default_Resource_Factory - codeset manager=0x24ef920
+TAO (2667|2667) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (2667|2667) - UTF16_BOM_Translator: forceBE 0
+TAO (2667|2667) - Loaded default protocol <IIOP_Factory>
+TAO (2667|2667) - Created new ORB <>
+TAO (2667|2667) - IIOP_Acceptor::open_i, listening on: <bogon:46047>
+TAO (2667|2667) - IIOP_Acceptor::open_i, listening on: <bogon:46047>
+TAO (2667|2667) - IIOP_Acceptor::open_i, listening on: <bogon:46047>
+TAO (2667|2667) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (2667|2667) - Stub::base_profiles, acquired profile lock this = 0x251b870
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (2667|2667) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (2667|2667) - Destroying ORB <>
+TAO (2784|2784) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (2784|2784) - Default_Resource_Factory - codeset manager=0x1d5c910
+TAO (2784|2784) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (2784|2784) - UTF16_BOM_Translator: forceBE 0
+TAO (2784|2784) - Loaded default protocol <IIOP_Factory>
+TAO (2784|2784) - Created new ORB <>
+TAO (2784|2784) - IIOP_Acceptor::open_i, listening on: <bogon:36821>
+TAO (2784|2784) - IIOP_Acceptor::open_i, listening on: <bogon:36821>
+TAO (2784|2784) - IIOP_Acceptor::open_i, listening on: <bogon:36821>
+TAO (2784|2784) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (2784|2784) - Stub::base_profiles, acquired profile lock this = 0x1d88860
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (2784|2784) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (2784|2784) - Destroying ORB <>
+TAO (2861|2861) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (2861|2861) - Default_Resource_Factory - codeset manager=0x1ece920
+TAO (2861|2861) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (2861|2861) - UTF16_BOM_Translator: forceBE 0
+TAO (2861|2861) - Loaded default protocol <IIOP_Factory>
+TAO (2861|2861) - Created new ORB <>
+TAO (2861|2861) - IIOP_Acceptor::open_i, listening on: <bogon:42835>
+TAO (2861|2861) - IIOP_Acceptor::open_i, listening on: <bogon:42835>
+TAO (2861|2861) - IIOP_Acceptor::open_i, listening on: <bogon:42835>
+TAO (2861|2861) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (2861|2861) - Stub::base_profiles, acquired profile lock this = 0x1efa870
+InfoRepo_Shutdown: shutting down on signal 2
+TAO (2861|2861) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (2861|2861) - Destroying ORB <>
+TAO (15111|15111) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (15111|15111) - Default_Resource_Factory - codeset manager=0x246f930
+TAO (15111|15111) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (15111|15111) - UTF16_BOM_Translator: forceBE 0
+TAO (15111|15111) - Loaded default protocol <IIOP_Factory>
+TAO (15111|15111) - Created new ORB <>
+TAO (15111|15111) - IIOP_Acceptor::open_i, listening on: <bogon:35423>
+TAO (15111|15111) - IIOP_Acceptor::open_i, listening on: <bogon:35423>
+TAO (15111|15111) - IIOP_Acceptor::open_i, listening on: <bogon:35423>
+TAO (15111|15111) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (15111|15111) - Stub::base_profiles, acquired profile lock this = 0x249b880
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (15111|15111) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (15111|15111) - Destroying ORB <>
+TAO (15342|15342) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (15342|15342) - Default_Resource_Factory - codeset manager=0x67b920
+TAO (15342|15342) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (15342|15342) - UTF16_BOM_Translator: forceBE 0
+TAO (15342|15342) - Loaded default protocol <IIOP_Factory>
+TAO (15342|15342) - Created new ORB <>
+TAO (15342|15342) - IIOP_Acceptor::open_i, listening on: <bogon:42211>
+TAO (15342|15342) - IIOP_Acceptor::open_i, listening on: <bogon:42211>
+TAO (15342|15342) - IIOP_Acceptor::open_i, listening on: <bogon:42211>
+TAO (15342|15342) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (15342|15342) - Stub::base_profiles, acquired profile lock this = 0x6a7870
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (15342|15342) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (15342|15342) - Destroying ORB <>
+TAO (16192|16192) - TAO_Time_Policy_Manager: loaded time policy strategy 'TAO_SYSTEM_TIME_POLICY'
+TAO (16192|16192) - Default_Resource_Factory - codeset manager=0x2548920
+TAO (16192|16192) - Codeset_Manager_i::init_ccs, Loaded Codeset translator <UTF8_Latin1_Factory>, ncs = 00010001 tcs = 05010001
+TAO (16192|16192) - UTF16_BOM_Translator: forceBE 0
+TAO (16192|16192) - Loaded default protocol <IIOP_Factory>
+TAO (16192|16192) - Created new ORB <>
+TAO (16192|16192) - IIOP_Acceptor::open_i, listening on: <bogon:33333>
+TAO (16192|16192) - IIOP_Acceptor::open_i, listening on: <bogon:33333>
+TAO (16192|16192) - IIOP_Acceptor::open_i, listening on: <bogon:33333>
+TAO (16192|16192) - TAO_Unique_Id_Strategy::bind_using_user_id: type=IDL:OpenDDS/DCPS/DCPSInfo:1.0, id=0x496e666f526570
+TAO (16192|16192) - Stub::base_profiles, acquired profile lock this = 0x2574870
+InfoRepo_Shutdown: shutting down on signal 15
+TAO (16192|16192) - TAO_Unique_Id_Strategy::unbind_using_user_id: id=0x496e666f526570
+CORBA::ORB::destroy() called on ORB <>.
+TAO (16192|16192) - Destroying ORB <>
