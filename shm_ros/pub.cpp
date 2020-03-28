@@ -1,9 +1,11 @@
+#include <ipc/publisher.h>
+#include <ros/ros.h>
+#include <std_msgs/String.h>
 #include <unistd.h>
 #include <atomic>
 #include <sstream>
+
 #include "common.h"
-#include "ros/ros.h"
-#include "std_msgs/String.h"
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -24,7 +26,8 @@ int main(int argc, char** argv) {
 
   int data_size = atoi(*(argv + 1));
   ros::NodeHandle n;
-  ros::Publisher perf_pub = n.advertise<std_msgs::String>("ros_testing", 1000);
+  drive::common::ipc::Publisher perf_pub =
+      drive::common::ipc::advertise<std_msgs::String>(n, "ros_shm_topic", 1000);
 
   std_msgs::String msg;
 
@@ -43,9 +46,8 @@ int main(int argc, char** argv) {
     std::memcpy(&msg.data[8], &data_size, 4);
     std::memcpy(&msg.data[12], tmpData, data_size);
     perf_pub.publish(msg);
-    // fprintf(stderr, "Published message!\n");
     round += 1;
-    // If transport time larger than 1s, then can not use this to measure one e2e overhead
+ 
     usleep(100000);
   }
   return 0;
