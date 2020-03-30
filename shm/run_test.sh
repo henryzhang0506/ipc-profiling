@@ -10,7 +10,7 @@ OUT_FILE=/tmp/sub_shm_`date "+%y_%m_%d_%H_%M_%S"`.out
 
 nohup ./sub > ${OUT_FILE} 2>&1 &
 
-sleep 1
+sleep 3
 
 ./pub $1
 

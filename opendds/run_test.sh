@@ -17,6 +17,6 @@ nohup ./subscriber -DCPSConfigFile rtps.ini > ${OUT_FILE} 2>&1 &
 # start publisher
 ./publisher -DCPSConfigFile rtps.ini $1
 
-sleep 1
+sleep 3
 
 grep "========" ${OUT_FILE}
