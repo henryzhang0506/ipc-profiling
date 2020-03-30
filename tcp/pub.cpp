@@ -67,7 +67,7 @@ int main(int argc, char const* argv[]) {
     }
     delete[] data;
     // Wait data complete in the connection
-    usleep(500000);
+    usleep(50000);
   }
 
   return 0;

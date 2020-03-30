@@ -113,7 +113,7 @@ int main(int argc, char** argv) {
     //  usleep(1000);
     //}
     // shm_unlink(share_name);
-    usleep(500000);
+    usleep(50000);
   }
   kill(sub_pid, SIGUSR1);
 

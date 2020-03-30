@@ -69,7 +69,7 @@ int main(int argc, char const* argv[]) {
       }
       i += n;
     }
-    usleep(500000);
+    usleep(50000);
   }
 
   // for (int r = 0; r < ROUND; ++r) {

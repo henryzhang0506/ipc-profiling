@@ -180,7 +180,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
                    ACE_TEXT("ERROR: %N:%l: main() -")
                    ACE_TEXT(" write returned %d!\n"), error));
       }
-      usleep(500000);
+      usleep(50000);
     }
 
     // Wait for samples to be acknowledged

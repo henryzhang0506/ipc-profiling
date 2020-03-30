@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
     perf_pub.publish(msg);
     round += 1;
  
-    usleep(500000);
+    usleep(50000);
   }
   return 0;
 }
