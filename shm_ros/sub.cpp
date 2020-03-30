@@ -29,7 +29,7 @@ class Wrapper {
     sum += delta;
     cnt += 1;
     if (cnt > ROUND) {
-      fprintf(stderr, "========= ROS mean transport time for size(%d) is: %lf ms =========\n",
+      fprintf(stderr, "========= SHM_ROS mean transport time for size(%d) is: %lf ms =========\n",
               data_size, sum / cnt);
       //exit(0);
       ros::shutdown();
