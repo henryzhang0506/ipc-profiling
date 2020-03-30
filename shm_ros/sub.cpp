@@ -11,6 +11,12 @@ int cnt = 0;
 class Wrapper {
  public:
   Wrapper() {
+    FLAGS_ipc_pubsub_report_internal_metrics = false;
+    FLAGS_ipc_pubsub_subscriber_modes = "shm";
+    FLAGS_ipc_pubsub_subscriber_protocol = "tcp";
+    FLAGS_ipc_pubsub_subscriber_tcp_nodelay = "true";
+    FLAGS_ipc_pubsub_subscriber_ros_connection_management_mode = "off";
+
     sub_ = drive::common::ipc::subscribe(n_, "ros_shm_topic", 1000, &Wrapper::callback, this);
   }
 

@@ -26,7 +26,12 @@ int main(int argc, char** argv) {
 
   int data_size = atoi(*(argv + 1));
   ros::NodeHandle n;
-  drive::common::ipc::Publisher perf_pub =
+  FLAGS_ipc_pubsub_report_internal_metrics = false;
+  FLAGS_ipc_pubsub_publisher_modes = "shm";
+  FLAGS_ipc_pubsub_publisher_force_outgoing_queue_flush = true;
+  FLAGS_ipc_pubsub_subscriber_ros_connection_management_mode = "off";
+
+  auto perf_pub =
       drive::common::ipc::advertise<std_msgs::String>(n, "ros_shm_topic", 1000);
 
   std_msgs::String msg;
