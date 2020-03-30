@@ -43,13 +43,6 @@ class Wrapper {
 int main(int argc, char** argv) {
   ros::init(argc, argv, "ros_sub");
   Wrapper w;
-  // Precision 0.1ms
-  ros::Rate loop_rate(100000);
-  while (ros::ok()) {
-    ros::spinOnce();
-    loop_rate.sleep();
-  }
-
-  // ros::spin();
+  ros::spin();
   return 0;
 }
