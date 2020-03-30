@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <atomic>
 #include <sstream>
-#include "common.h"
+#include "../common.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
@@ -32,10 +32,11 @@ int main(int argc, char** argv) {
   msg.data.resize(12 + data_size);
   // For the first round
   int round = 0;
+  ros::Rate loop_rate(GetFrequencyHZ());
   while (ros::ok()) {
     ros::spinOnce();
     // Should send a few more messages, since ros may lose some messages at the begining
-    if (round >= ROUND + 10) {
+    if (round >= GetNumRounds() + 100) {
       ros::shutdown();
     }
     std::memcpy(&msg.data[8], &data_size, 4);
@@ -48,7 +49,7 @@ int main(int argc, char** argv) {
     // fprintf(stderr, "Published message!\n");
     round += 1;
     // If transport time larger than 500ms, then can not use this to measure one e2e overhead
-    usleep(50000);
+    loop_rate.sleep();
   }
   return 0;
 }

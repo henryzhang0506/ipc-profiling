@@ -6,7 +6,7 @@
 #include <unistd.h>
 #include <netinet/in.h>
 #include <netinet/tcp.h>
-#include "common.h"
+#include "../common.h"
 #define PORT 8080
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -52,7 +52,7 @@ int main(int argc, char const* argv[]) {
     printf("\nConnection Failed \n");
     return -1;
   }
-  for (int r = 0; r < ROUND; ++r) {
+  for (int r = 0; r < GetNumRounds() + 100; ++r) {
     // time in allocating memory not included
     printf("Round: %d\n", r);
     uint8_t* data = create_tmp_data(data_size);
@@ -67,7 +67,7 @@ int main(int argc, char const* argv[]) {
     }
     delete[] data;
     // Wait data complete in the connection
-    usleep(50000);
+    usleep(1000000 / GetFrequencyHZ());
   }
 
   return 0;

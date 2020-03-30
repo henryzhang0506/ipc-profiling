@@ -15,7 +15,7 @@
 #include <iomanip>
 #include <iostream>
 
-#include "common.h"
+#include "../common.h"
 
 static double sum = 0.0;
 static int count = 0;
@@ -71,7 +71,7 @@ DataReaderListenerImpl::on_data_available(DDS::DataReader_ptr reader)
     double delta = (cur_time - message.sent_time) * 1000;
     sum += delta;
     count += 1;
-    if (count == ROUND) {
+    if (count == GetNumRounds()) {
       fprintf(stderr, "========= OpenDDS mean transport time for size(%d) is: %lf ms =========\n", message.data_size, sum / count);
     }
     std::cout << std::setprecision(3) << std::fixed << "delta: " << delta << ", count: " << count << std::endl;

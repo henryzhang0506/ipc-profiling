@@ -3,7 +3,7 @@
 #include <atomic>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-#include "common.h"
+#include "../common.h"
 
 double sum = 0.0;
 int cnt = 0;
@@ -28,7 +28,7 @@ class Wrapper {
     printf("SHM_ROS transport time is: %lf ms\n", delta);
     sum += delta;
     cnt += 1;
-    if (cnt > ROUND) {
+    if (cnt >= GetNumRounds()) {
       fprintf(stderr, "========= SHM_ROS mean transport time for size(%d) is: %lf ms =========\n",
               data_size, sum / cnt);
       //exit(0);

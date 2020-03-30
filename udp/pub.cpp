@@ -5,7 +5,7 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <algorithm>
-#include "common.h"
+#include "../common.h"
 #define PORT 8080
 
 #define MAXLINE 1024
@@ -41,7 +41,7 @@ int main(int argc, char const* argv[]) {
 
   int n, len;
 
-  for (int r = 0; r < ROUND; ++r) {
+  for (int r = 0; r < GetNumRounds() + 100; ++r) {
     uint8_t* data = create_tmp_data(data_size);
     double cur_time = get_wall_time();
     n = sendto(sockfd, &cur_time, sizeof(double), 0, (const struct sockaddr*)&serv_addr,
@@ -69,7 +69,7 @@ int main(int argc, char const* argv[]) {
       }
       i += n;
     }
-    usleep(50000);
+    usleep(1000000 / GetFrequencyHZ());
   }
 
   // for (int r = 0; r < ROUND; ++r) {
