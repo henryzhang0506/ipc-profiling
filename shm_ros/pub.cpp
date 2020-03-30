@@ -41,10 +41,12 @@ int main(int argc, char** argv) {
     if (round >= ROUND + 10) {
       ros::shutdown();
     }
-    double current_time = get_wall_time();
-    std::memcpy(&msg.data[0], &current_time, 8);
     std::memcpy(&msg.data[8], &data_size, 4);
     std::memcpy(&msg.data[12], tmpData, data_size);
+
+    double current_time = get_wall_time();
+    std::memcpy(&msg.data[0], &current_time, 8);
+
     perf_pub.publish(msg);
     round += 1;
  
