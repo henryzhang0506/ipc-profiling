@@ -103,10 +103,11 @@ int main(int argc, char** argv) {
     // encapsulate pid
     memcpy(shmptr + 12, &pid, 4);
     memcpy(shmptr + 16, data, data_size);
+    kill(sub_pid, SIGUSR2);
+
     // Release memory
     munmap(shmptr, data_size + 16);
     close(fd);
-    kill(sub_pid, SIGUSR2);
     // while (!next_round) {
     //  // Waiting receiver end
     //  usleep(1000);
