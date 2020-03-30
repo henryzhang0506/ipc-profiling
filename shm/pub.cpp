@@ -31,7 +31,7 @@ void handler_next_round(int signum) {
   }
 }
 
-void* create_shared_memory(const char* name, size_t size, int &fdd) {
+void* create_shared_memory(const char* name, size_t size, int& fdd) {
   int fd = shm_open(name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
   if (fd == -1) {
     perror("open");
@@ -83,18 +83,18 @@ int main(int argc, char** argv) {
   f >> sub_pid;
 
   int data_size = atoi(*(argv + 1));
-  // time used in allocating memory do not included
-  uint8_t* data = create_tmp_data(data_size);
 
   // Begin the test round
   for (int i = 0; i < ROUND; ++i) {
-    next_round = false;
+    // time used in allocating memory do not included
+    uint8_t* data = create_tmp_data(data_size);
+    // next_round = false;
     double current_time = get_wall_time();
     char share_name[16];
     sprintf(share_name, "shm_%d", i);
 
     int fd = -1;
-    uint8_t* shmptr = static_cast<uint8_t*>(create_shared_memory(share_name, data_size+16, fd));
+    uint8_t* shmptr = static_cast<uint8_t*>(create_shared_memory(share_name, data_size + 16, fd));
 
     // encapsulate timestamp
     memcpy(shmptr, &current_time, sizeof(current_time));
@@ -104,14 +104,15 @@ int main(int argc, char** argv) {
     memcpy(shmptr + 12, &pid, 4);
     memcpy(shmptr + 16, data, data_size);
     // Release memory
-    munmap(shmptr, data_size+16);
+    munmap(shmptr, data_size + 16);
     close(fd);
     kill(sub_pid, SIGUSR2);
-    while (!next_round) {
-      // Waiting receiver end
-      usleep(1000);
-    }
-    //shm_unlink(share_name);
+    // while (!next_round) {
+    //  // Waiting receiver end
+    //  usleep(1000);
+    //}
+    // shm_unlink(share_name);
+    usleep(500000);
   }
   kill(sub_pid, SIGUSR1);
 

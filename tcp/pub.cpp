@@ -4,6 +4,8 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 #include "common.h"
 #define PORT 8080
 
@@ -30,6 +32,14 @@ int main(int argc, char const* argv[]) {
     return -1;
   }
 
+  int on = 1;
+
+  //if (setsockopt(sock, SOL_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
+  if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
+    perror("setsockopt tcp_nodelay error");
+    exit(EXIT_FAILURE);
+  }
+  
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(PORT);
 
@@ -56,6 +66,8 @@ int main(int argc, char const* argv[]) {
       i += count;
     }
     delete[] data;
+    // Wait data complete in the connection
+    usleep(500000);
   }
 
   return 0;

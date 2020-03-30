@@ -7,13 +7,13 @@
 #include "common.h"
 #define PORT 8080
 
-#define MAX_BUF_LEN 1024000000 // 1GB
+#define MAX_BUF_LEN 1024000000  // 1GB
 char recvBuf[MAX_BUF_LEN];
 
 double sum = 0;
 
 int main(int argc, char const *argv[]) {
-  int server_fd, new_socket, valread;
+  int server_fd, new_socket;
   struct sockaddr_in address;
   int opt = 1;
   int addrlen = sizeof(address);
@@ -25,6 +25,7 @@ int main(int argc, char const *argv[]) {
     perror("socket failed");
     exit(EXIT_FAILURE);
   }
+
 
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
@@ -47,13 +48,17 @@ int main(int argc, char const *argv[]) {
     read(new_socket, &sent_time, sizeof(double));
     read(new_socket, &data_size, sizeof(int));
 
+    double end_time1 = get_wall_time();
+    fprintf(stderr, "read header time is: %lf\n", (end_time1 - sent_time) * 1000);
+
     int i = 0, count = 0;
     while (i < data_size) {
-      count = read(new_socket, recvBuf+i, data_size-i);
+      count = read(new_socket, recvBuf + i, data_size - i);
       i += count;
     }
     double end_time = get_wall_time();
     double delta = (end_time - sent_time) * 1000;
+    fprintf(stderr, "end_time is: %lf, sent_time is: %lf\n", end_time, sent_time);
     printf("transport time is: %lf\n", delta);
     sum += delta;
   }

@@ -70,7 +70,7 @@ void handler_receive(int signum) {
     close(fd);
     shm_unlink(share_name);
     // trigger next round
-    kill(pub_pid, SIGUSR1);
+    //kill(pub_pid, SIGUSR1);
   }
 }
 
