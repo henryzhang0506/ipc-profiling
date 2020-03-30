@@ -10,11 +10,11 @@ ALL: pub sub
 
 .PHONY:pub
 pub:
-	q++ -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp -I$(QNX_TARGETFS)/opt/ros/kinetic/include -I$(QNX_TARGETFS)/opt/plusai/external/opt/include -L$(QNX_TARGETFS)/opt/ros/kinetic/lib -lrosconsole -lrostime -lcpp_common -lroscpp_serialization -Wl,-rpath-link=$(QNX_TARGETFS)/opt/plusai/external/opt/lib:$(QNX_TARGETFS)/opt/ros/kinetic/lib -lroscpp -lsocket
+	q++ -O3 -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp -I$(QNX_TARGETFS)/opt/ros/kinetic/include -I$(QNX_TARGETFS)/opt/plusai/external/opt/include -L$(QNX_TARGETFS)/opt/ros/kinetic/lib -lrosconsole -lrostime -lcpp_common -lroscpp_serialization -Wl,-rpath-link=$(QNX_TARGETFS)/opt/plusai/external/opt/lib:$(QNX_TARGETFS)/opt/ros/kinetic/lib -lroscpp -lsocket
 
 .PHONY:sub
 sub:
-	q++ -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp -I$(QNX_TARGETFS)/opt/ros/kinetic/include -I$(QNX_TARGETFS)/opt/plusai/external/opt/include -L$(QNX_TARGETFS)/opt/ros/kinetic/lib -lrosconsole -lrostime -lcpp_common -lroscpp_serialization -Wl,-rpath-link=$(QNX_TARGETFS)/opt/plusai/external/opt/lib:$(QNX_TARGETFS)/opt/ros/kinetic/lib -lroscpp -lsocket
+	q++ -O3 -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp -I$(QNX_TARGETFS)/opt/ros/kinetic/include -I$(QNX_TARGETFS)/opt/plusai/external/opt/include -L$(QNX_TARGETFS)/opt/ros/kinetic/lib -lrosconsole -lrostime -lcpp_common -lroscpp_serialization -Wl,-rpath-link=$(QNX_TARGETFS)/opt/plusai/external/opt/lib:$(QNX_TARGETFS)/opt/ros/kinetic/lib -lroscpp -lsocket
 
 .PHONY:clean
 clean:

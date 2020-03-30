@@ -2,10 +2,10 @@ ALL: pub sub
 
 .PHONY:pub
 pub:
-	g++ -o pub pub.cpp
+	g++ -O3 -o pub pub.cpp
 .PHONY:sub
 sub:
-	g++ -o sub sub.cpp
+	g++ -O3 -o sub sub.cpp
 
 .PHONY:clean
 clean:
