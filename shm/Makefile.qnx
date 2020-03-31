@@ -7,10 +7,11 @@ ALL: pub sub
 
 .PHONY:pub
 pub:
-	q++ -O3 -g3 -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp
+	q++ -O3 -g3 -V5.4.0,gcc_ntoaarch64le -o pub pub.cpp  -D__QNX__
+
 .PHONY:sub
 sub:
-	q++ -O3 -g3 -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp
+	q++ -O3 -g3 -V5.4.0,gcc_ntoaarch64le -o sub sub.cpp  -D__QNX__
 
 .PHONY:clean
 clean:
