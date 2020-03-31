@@ -16,7 +16,7 @@
 #define MAX_MSG_SIZE 1024000000
 
 uint8_t* shmptr;
-uint8_t recvBuf[MAX_MSG_SIZE]; // max 1GB size
+uint8_t recvBuf[MAX_MSG_SIZE];  // max 1GB size
 uint8_t header[16];
 int data_size;
 int round = 0;
@@ -33,10 +33,10 @@ void handler_calculate(int signum) {
 
 void handler_receive(int signum) {
   if (signum == SIGUSR2) {
-
+    double enter_sub_time = get_wall_time();
     char share_name[16];
     sprintf(share_name, "shm_%d", round);
-    int fd = shm_open(share_name, O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+    int fd = shm_open(share_name, O_RDONLY, S_IRUSR | S_IWUSR);
     if (fd == -1) {
       perror("shm_open");
       return;
@@ -48,6 +48,9 @@ void handler_receive(int signum) {
     }
 
     double sent_time = *((double*)header);
+    //fprintf(stderr, "Upon receiving msg: %lf ms\n", (enter_sub - sent_time) * 1000);
+    //fprintf(stderr, "Before mmap transport takes: %lf ms\n", (get_wall_time() - sent_time) * 1000);
+    double t3 = get_wall_time();
     data_size = *((int*)(header + 8));
     pub_pid = *((int*)(header + 12));
 
@@ -56,6 +59,8 @@ void handler_receive(int signum) {
       perror("mmap");
       return;
     }
+    double t4 = get_wall_time();
+    //fprintf(stderr, "upon SHM transport takes: %lf ms\n", (get_wall_time() - sent_time) * 1000);
 
     shmptr = static_cast<uint8_t*>(addr);
     memcpy(recvBuf, shmptr + 16, data_size);
@@ -65,12 +70,18 @@ void handler_receive(int signum) {
     double transport_time = recv_time - sent_time;
     round += 1;
     sum += transport_time * 1000;
+#ifdef DEBUG_SHM
+    fprintf(stderr, "Received time gap is: %lf\n", (enter_sub_time - sent_time)*1000);
+    fprintf(stderr, "shm_open time gap is: %lf\n", (t3 - enter_sub_time)*1000);
+    fprintf(stderr, "mmap time gap is: %lf\n", (t4-t3)*1000);
+    fprintf(stderr, "memcpy time gap is: %lf\n", (recv_time-t4)*1000);
+#endif
     printf("Transport time is: %lf ms\n", transport_time * 1000);
-    munmap(shmptr, data_size+16);
+    munmap(shmptr, data_size + 16);
     close(fd);
     shm_unlink(share_name);
     // trigger next round
-    //kill(pub_pid, SIGUSR1);
+    // kill(pub_pid, SIGUSR1);
   }
 }
 
