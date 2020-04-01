@@ -27,7 +27,7 @@
 
 #include "MessengerTypeSupportImpl.h"
 
-#include "common.h"
+#include "../common.h"
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -169,7 +169,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
     message.data_size = data_size;
     //message.text       = "Worst. Movie. Ever.";
 
-    for (int i = 0; i < ROUND; ++i) {
+    for (int i = 0; i < GetNumRounds(); ++i) {
       message.sent_time = get_wall_time();
       DDS::ReturnCode_t error = message_writer->write(message, DDS::HANDLE_NIL);
       //++message.count;
@@ -180,7 +180,7 @@ ACE_TMAIN(int argc, ACE_TCHAR *argv[])
                    ACE_TEXT("ERROR: %N:%l: main() -")
                    ACE_TEXT(" write returned %d!\n"), error));
       }
-      usleep(500000);
+      usleep(1000000 / GetFrequencyHZ());
     }
 
     // Wait for samples to be acknowledged

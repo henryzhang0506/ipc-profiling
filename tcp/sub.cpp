@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include "common.h"
+#include "../common.h"
 #define PORT 8080
 
 #define MAX_BUF_LEN 1024000000  // 1GB
@@ -44,7 +44,7 @@ int main(int argc, char const *argv[]) {
     perror("accept");
     exit(EXIT_FAILURE);
   }
-  for (int r = 0; r < ROUND; ++r) {
+  for (int r = 0; r < GetNumRounds(); ++r) {
     read(new_socket, &sent_time, sizeof(double));
     read(new_socket, &data_size, sizeof(int));
 
@@ -63,6 +63,6 @@ int main(int argc, char const *argv[]) {
     sum += delta;
   }
   printf("========= TCP mean transport time for size(%d) is: %lf ms =========\n", data_size,
-         sum / ROUND);
+         sum / GetNumRounds());
   return 0;
 }

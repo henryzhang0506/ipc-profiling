@@ -5,7 +5,7 @@
 #include <atomic>
 #include <sstream>
 
-#include "common.h"
+#include "../common.h"
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -26,7 +26,12 @@ int main(int argc, char** argv) {
 
   int data_size = atoi(*(argv + 1));
   ros::NodeHandle n;
-  drive::common::ipc::Publisher perf_pub =
+  FLAGS_ipc_pubsub_report_internal_metrics = false;
+  FLAGS_ipc_pubsub_publisher_modes = "shm";
+  FLAGS_ipc_pubsub_publisher_force_outgoing_queue_flush = true;
+  FLAGS_ipc_pubsub_subscriber_ros_connection_management_mode = "off";
+
+  auto perf_pub =
       drive::common::ipc::advertise<std_msgs::String>(n, "ros_shm_topic", 1000);
 
   std_msgs::String msg;
@@ -35,20 +40,22 @@ int main(int argc, char** argv) {
   msg.data.resize(12 + data_size);
   // For the first round
   int round = 0;
+  ros::Rate loop_rate(GetFrequencyHZ());
   while (ros::ok()) {
     ros::spinOnce();
     // Should send a few more messages, since ros may lose some messages at the begining
-    if (round >= ROUND + 10) {
+    if (round >= GetNumRounds() + 100) {
       ros::shutdown();
     }
-    double current_time = get_wall_time();
-    std::memcpy(&msg.data[0], &current_time, 8);
     std::memcpy(&msg.data[8], &data_size, 4);
     std::memcpy(&msg.data[12], tmpData, data_size);
+
+    double current_time = get_wall_time();
+    std::memcpy(&msg.data[0], &current_time, 8);
+
     perf_pub.publish(msg);
     round += 1;
- 
-    usleep(500000);
+    loop_rate.sleep();
   }
   return 0;
 }

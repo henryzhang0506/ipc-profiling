@@ -6,7 +6,7 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include "common.h"
+#include "../common.h"
 #define PORT 8080
 
 #define MAX_BUF_LEN 1024000000  // 1GB
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[]) {
   uint32_t len;
   len = sizeof(cliaddr);  // len is value/resuslt
 
-  for (int r = 0; r < ROUND; ++r) {
+  for (int r = 0; r < GetNumRounds(); ++r) {
     int i = 0;
     ssize_t n;
     recvfrom(server_fd, &sent_time, sizeof(double), MSG_WAITALL, NULL, NULL);
@@ -81,6 +81,6 @@ int main(int argc, char const *argv[]) {
   //  sum += delta;
   //}
   printf("========= UDP mean transport time for size(%d) is: %lf ms =========\n", data_size,
-         sum / ROUND);
+         sum / GetNumRounds());
   return 0;
 }

@@ -13,7 +13,6 @@
 #include <string>
 #include "common.h"
 
-#define ROUND 100
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 bool next_round = false;
 
@@ -85,7 +84,7 @@ int main(int argc, char** argv) {
   int data_size = atoi(*(argv + 1));
 
   // Begin the test round
-  for (int i = 0; i < ROUND; ++i) {
+  for (int i = 0; i < GetNumRounds() + 100; ++i) {
     // time used in allocating memory do not included
     uint8_t* data = create_tmp_data(data_size);
     // next_round = false;
@@ -103,16 +102,17 @@ int main(int argc, char** argv) {
     // encapsulate pid
     memcpy(shmptr + 12, &pid, 4);
     memcpy(shmptr + 16, data, data_size);
+    kill(sub_pid, SIGUSR2);
+
     // Release memory
     munmap(shmptr, data_size + 16);
     close(fd);
-    kill(sub_pid, SIGUSR2);
     // while (!next_round) {
     //  // Waiting receiver end
     //  usleep(1000);
     //}
     // shm_unlink(share_name);
-    usleep(500000);
+    usleep(1000000 / GetFrequencyHZ());
   }
   kill(sub_pid, SIGUSR1);
 

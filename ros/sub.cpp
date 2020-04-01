@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <atomic>
-#include "common.h"
+#include "../common.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
@@ -23,7 +23,7 @@ class Wrapper {
     printf("ROS transport time is: %lf ms\n", delta);
     sum += delta;
     cnt += 1;
-    if (cnt > ROUND) {
+    if (cnt > GetNumRounds()) {
       fprintf(stderr, "========= ROS mean transport time for size(%d) is: %lf ms =========\n",
               data_size, sum / cnt);
       ros::shutdown();
@@ -38,13 +38,6 @@ class Wrapper {
 int main(int argc, char** argv) {
   ros::init(argc, argv, "ros_sub");
   Wrapper w;
-  // Precision 0.1ms
-  ros::Rate loop_rate(100000);
-  while (ros::ok()) {
-    ros::spinOnce();
-    loop_rate.sleep();
-  }
-
-  // ros::spin();
+  ros::spin();
   return 0;
 }
