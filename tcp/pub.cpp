@@ -1,11 +1,11 @@
 #include <arpa/inet.h>
+#include <netinet/in.h>
+#include <netinet/tcp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
-#include <netinet/in.h>
-#include <netinet/tcp.h>
 #include "../common.h"
 #define PORT 8080
 
@@ -20,9 +20,13 @@ uint8_t* create_tmp_data(int size) {
 }
 
 int main(int argc, char const* argv[]) {
-  if (argc != 2) {
-    printf("Usage: %s <pub_size>\n", *argv);
+  if (argc > 3) {
+    printf("Usage: %s <pub_size> [<sub address>]\n", *argv);
     return 1;
+  }
+  const char* dest = "127.0.0.1";
+  if (argc == 3) {
+    dest = argv[2];
   }
   int data_size = atoi(*(argv + 1));
   int sock = 0;
@@ -34,16 +38,17 @@ int main(int argc, char const* argv[]) {
 
   int on = 1;
 
-  //if (setsockopt(sock, SOL_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
+  // if (setsockopt(sock, SOL_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
   if (setsockopt(sock, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
     perror("setsockopt tcp_nodelay error");
     exit(EXIT_FAILURE);
   }
-  
+
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(PORT);
 
-  if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+  // if (inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr) <= 0) {
+  if (inet_pton(AF_INET, dest, &serv_addr.sin_addr) <= 0) {
     printf("\nInvalid address/ Address not supported \n");
     return -1;
   }

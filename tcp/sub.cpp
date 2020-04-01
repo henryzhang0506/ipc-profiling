@@ -49,7 +49,7 @@ int main(int argc, char const *argv[]) {
     read(new_socket, &data_size, sizeof(int));
 
     double end_time1 = get_wall_time();
-    fprintf(stderr, "read header time is: %lf\n", (end_time1 - sent_time) * 1000);
+    //fprintf(stderr, "read header time is: %lf\n", (end_time1 - sent_time) * 1000);
 
     int i = 0, count = 0;
     while (i < data_size) {
@@ -58,7 +58,7 @@ int main(int argc, char const *argv[]) {
     }
     double end_time = get_wall_time();
     double delta = (end_time - sent_time) * 1000;
-    fprintf(stderr, "end_time is: %lf, sent_time is: %lf\n", end_time, sent_time);
+    //fprintf(stderr, "end_time is: %lf, sent_time is: %lf\n", end_time, sent_time);
     printf("transport time is: %lf\n", delta);
     sum += delta;
   }
