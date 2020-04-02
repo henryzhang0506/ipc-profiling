@@ -1,4 +1,5 @@
 #include <netinet/in.h>
+#include <netinet/tcp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -25,8 +26,7 @@ int main(int argc, char const *argv[]) {
     perror("socket failed");
     exit(EXIT_FAILURE);
   }
-
-
+  
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
   address.sin_port = htons(PORT);
@@ -44,25 +44,42 @@ int main(int argc, char const *argv[]) {
     perror("accept");
     exit(EXIT_FAILURE);
   }
-  for (int r = 0; r < GetNumRounds(); ++r) {
-    read(new_socket, &sent_time, sizeof(double));
-    read(new_socket, &data_size, sizeof(int));
 
-    double end_time1 = get_wall_time();
-    //fprintf(stderr, "read header time is: %lf\n", (end_time1 - sent_time) * 1000);
+  int on = 1;
+
+  if (setsockopt(new_socket, IPPROTO_TCP, TCP_NODELAY, &on, sizeof(on)) == -1) {
+    perror("setsockopt tcp_nodelay error");
+    exit(EXIT_FAILURE);
+  }
+
+  for (int r = 0; r < GetNumRounds(); ++r) {
+    // read(new_socket, &sent_time, sizeof(double));
+    if (read(new_socket, &data_size, 4) != 4) {
+      perror("read data_size error!");
+      exit(1);
+    }
+
+    //double end_time1 = get_wall_time();
 
     int i = 0, count = 0;
     while (i < data_size) {
       count = read(new_socket, recvBuf + i, data_size - i);
       i += count;
     }
-    double end_time = get_wall_time();
-    double delta = (end_time - sent_time) * 1000;
-    //fprintf(stderr, "end_time is: %lf, sent_time is: %lf\n", end_time, sent_time);
-    printf("transport time is: %lf\n", delta);
-    sum += delta;
+    // double end_time = get_wall_time();
+    // double delta = (end_time - sent_time) * 1000;
+    // printf("transport time is: %lf\n", delta);
+    // sum += delta;
+
+    // Send back the data
+    i = 0, count = 0;
+    while (i < data_size) {
+      count = write(new_socket, recvBuf + i, data_size - i);
+      i += count;
+    }
+    fprintf(stderr, "data_size is: %d\n", data_size);
   }
-  printf("========= TCP mean transport time for size(%d) is: %lf ms =========\n", data_size,
-         sum / GetNumRounds());
+  //printf("========= TCP mean transport time for size(%d) is: %lf ms =========\n", data_size,
+         //sum / GetNumRounds());
   return 0;
 }

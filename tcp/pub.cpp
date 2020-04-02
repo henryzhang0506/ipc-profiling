@@ -10,6 +10,7 @@
 #define PORT 8080
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+double sum = 0.0;
 
 uint8_t* create_tmp_data(int size) {
   uint8_t* tmpBuf = new uint8_t[size];
@@ -57,23 +58,38 @@ int main(int argc, char const* argv[]) {
     printf("\nConnection Failed \n");
     return -1;
   }
-  for (int r = 0; r < GetNumRounds() + 100; ++r) {
+  int R = GetNumRounds();
+  for (int r = 0; r < R; ++r) {
     // time in allocating memory not included
     printf("Round: %d\n", r);
     uint8_t* data = create_tmp_data(data_size);
     double current_time = get_wall_time();
-    write(sock, &current_time, sizeof(double));
-    write(sock, &data_size, 4);
+    // write(sock, &current_time, sizeof(double));
+    if (write(sock, &data_size, 4) != 4) {
+      perror("Write data_size error!");
+      exit(1);
+    }
     int count = 0;
     int i = 0;
     while (i < data_size) {
       count = write(sock, data + i, data_size - i);
       i += count;
     }
+
+    // Receive the back data
+    i = 0, count = 0;
+    while (i < data_size) {
+      count = read(sock, data + i, data_size - i);
+      i += count;
+    }
+    double delta = (get_wall_time() - current_time) * 1000;
+    sum += delta;
+    fprintf(stderr, "Roundtrip time is: %lf\n", delta);
     delete[] data;
     // Wait data complete in the connection
     usleep(1000000 / GetFrequencyHZ());
   }
-
+  fprintf(stderr, "========= Mean Roundtrip time for size(%d) is: %lf ms ========= \n", data_size,
+          sum / R);
   return 0;
 }
