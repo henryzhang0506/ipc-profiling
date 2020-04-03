@@ -64,7 +64,10 @@ int main(int argc, char const* argv[]) {
     printf("Round: %d\n", r);
     uint8_t* data = create_tmp_data(data_size);
     double current_time = get_wall_time();
-    // write(sock, &current_time, sizeof(double));
+    if(write(sock, &current_time, sizeof(double)) != 8) {
+      perror("Write current timestamp error!");
+      exit(1);
+    }
     if (write(sock, &data_size, 4) != 4) {
       perror("Write data_size error!");
       exit(1);
