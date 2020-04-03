@@ -11,6 +11,7 @@
 
 const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 double sum = 0.0;
+int real_round = 0;
 
 uint8_t* create_tmp_data(int size) {
   uint8_t* tmpBuf = new uint8_t[size];
@@ -59,7 +60,7 @@ int main(int argc, char const* argv[]) {
     return -1;
   }
   int R = GetNumRounds();
-  for (int r = 0; r < R; ++r) {
+  for (int r = 0; r < R + 10; ++r) {
     // time in allocating memory not included
     printf("Round: %d\n", r);
     uint8_t* data = create_tmp_data(data_size);
@@ -86,13 +87,16 @@ int main(int argc, char const* argv[]) {
       i += count;
     }
     double delta = (get_wall_time() - current_time) * 1000;
-    sum += delta;
-    fprintf(stderr, "Roundtrip time is: %lf\n", delta);
+    if (r > 3 && r < R + 5) {
+        fprintf(stderr, "Roundtrip time is: %lf\n", delta);
+        sum += delta;
+	real_round += 1;
+    }
     delete[] data;
     // Wait data complete in the connection
     usleep(1000000 / GetFrequencyHZ());
   }
   fprintf(stderr, "========= Mean Roundtrip time for size(%d) is: %lf ms ========= \n", data_size,
-          sum / R);
+          sum / real_round);
   return 0;
 }

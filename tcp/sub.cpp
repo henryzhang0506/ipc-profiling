@@ -11,7 +11,7 @@
 #define MAX_BUF_LEN 1024000000  // 1GB
 char recvBuf[MAX_BUF_LEN];
 
-double sum = 0;
+double sum = 0.0;
 
 int main(int argc, char const *argv[]) {
   int server_fd, new_socket;
@@ -51,8 +51,8 @@ int main(int argc, char const *argv[]) {
     perror("setsockopt tcp_nodelay error");
     exit(EXIT_FAILURE);
   }
-
-  for (int r = 0; r < GetNumRounds(); ++r) {
+  int R = GetNumRounds();
+  for (int r = 0; r < R + 10; ++r) {
     if(read(new_socket, &sent_time, sizeof(double)) != 8) {
       perror("read sent_time error!");
       exit(1);
