@@ -55,7 +55,13 @@ int main(int argc, char const *argv[]) {
   }
 
   std::vector<double> deltas;
+  double start_time = 0.0;
   for (int r = 0; r < GetNumRounds(); ++r) {
+    if (read(new_socket, &start_time, 8) != 8) {
+      perror("read data_size error!");
+      exit(1);
+    }
+    
     if (read(new_socket, &data_size, 4) != 4) {
       perror("read data_size error!");
       exit(1);

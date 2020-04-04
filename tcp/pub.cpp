@@ -58,13 +58,16 @@ int main(int argc, char const* argv[]) {
     printf("\nConnection Failed \n");
     return -1;
   }
-  uint8_t *data = nullptr;
-  double start_time = 0.0, end_time = 0.0;
+  uint8_t *data = create_tmp_data(data_size);
+  double end_time = 0.0;
   int R = GetNumRounds();
+  double start_time = get_wall_time();
   for (int r = 0; r < R; ++r) {
-    if (data == nullptr) {
-        data = create_tmp_data(data_size);
-	start_time = get_wall_time();
+    // For each round, send start_time, data_size, data, 
+    // and then read back the data;
+    if (write(sock, &start_time, 8) != 8) {
+      perror("Write data_size error!");
+      exit(1);
     }
     if (write(sock, &data_size, 4) != 4) {
       perror("Write data_size error!");
