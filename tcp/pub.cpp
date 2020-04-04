@@ -58,15 +58,13 @@ int main(int argc, char const* argv[]) {
     printf("\nConnection Failed \n");
     return -1;
   }
+  uint8_t *data = nullptr;
+  double start_time = 0.0, end_time = 0.0;
   int R = GetNumRounds();
   for (int r = 0; r < R; ++r) {
-    // time in allocating memory not included
-    printf("Round: %d\n", r);
-    uint8_t* data = create_tmp_data(data_size);
-    double current_time = get_wall_time();
-    if(write(sock, &current_time, sizeof(double)) != 8) {
-      perror("Write current timestamp error!");
-      exit(1);
+    if (data == nullptr) {
+        data = create_tmp_data(data_size);
+	start_time = get_wall_time();
     }
     if (write(sock, &data_size, 4) != 4) {
       perror("Write data_size error!");
@@ -85,13 +83,10 @@ int main(int argc, char const* argv[]) {
       count = read(sock, data + i, data_size - i);
       i += count;
     }
-    double delta = (get_wall_time() - current_time) * 1000;
-    sum += delta;
-    fprintf(stderr, "Roundtrip time is: %lf\n", delta);
-    delete[] data;
-    // Wait data complete in the connection
-    usleep(1000000 / GetFrequencyHZ());
+    fprintf(stderr, "Round: %d, delta: %lf\n", r, (get_wall_time() - start_time) * 1000);
   }
+  end_time = get_wall_time();
+  sum = (end_time - start_time) * 1000;
   fprintf(stderr, "========= Mean Roundtrip time for size(%d) is: %lf ms ========= \n", data_size,
           sum / R);
   return 0;

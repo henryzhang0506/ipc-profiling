@@ -5,6 +5,8 @@
 #include <string.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <iostream>
+#include <vector>
 #include "../common.h"
 #define PORT 8080
 
@@ -26,7 +28,7 @@ int main(int argc, char const *argv[]) {
     perror("socket failed");
     exit(EXIT_FAILURE);
   }
-  
+
   address.sin_family = AF_INET;
   address.sin_addr.s_addr = INADDR_ANY;
   address.sin_port = htons(PORT);
@@ -52,17 +54,12 @@ int main(int argc, char const *argv[]) {
     exit(EXIT_FAILURE);
   }
 
+  std::vector<double> deltas;
   for (int r = 0; r < GetNumRounds(); ++r) {
-    if(read(new_socket, &sent_time, sizeof(double)) != 8) {
-      perror("read sent_time error!");
-      exit(1);
-    }
     if (read(new_socket, &data_size, 4) != 4) {
       perror("read data_size error!");
       exit(1);
     }
-
-    //double end_time1 = get_wall_time();
 
     int i = 0, count = 0;
     while (i < data_size) {
@@ -70,9 +67,6 @@ int main(int argc, char const *argv[]) {
       i += count;
     }
     double end_time = get_wall_time();
-    double delta = (end_time - sent_time) * 1000;
-    // printf("transport time is: %lf\n", delta);
-    // sum += delta;
 
     // Send back the data
     i = 0, count = 0;
@@ -80,10 +74,9 @@ int main(int argc, char const *argv[]) {
       count = write(new_socket, recvBuf + i, data_size - i);
       i += count;
     }
-    fprintf(stderr, "travel time is: %lf\n", delta);
   }
   fprintf(stderr, "data_size(%d) test end!\n", data_size);
-  //printf("========= TCP mean transport time for size(%d) is: %lf ms =========\n", data_size,
-         //sum / GetNumRounds());
+  // printf("========= TCP mean transport time for size(%d) is: %lf ms =========\n", data_size,
+  // sum / GetNumRounds());
   return 0;
 }
