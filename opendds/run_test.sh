@@ -6,7 +6,7 @@ if [ "$#" != "1" ]; then
 	exit 1
 fi
 
-OUT_FILE=/tmp/sub_tcp_`date "+%y_%m_%d_%H_%M_%S"`.out
+OUT_FILE=/tmp/sub_opendds_`date "+%y_%m_%d_%H_%M_%S"`.out
 
 # start the repo, this should be run only once
 #nohup DCPSInfoRepo -o simple.ior > /tmp/DCPSInfoRepo.out 2>&1 & 
