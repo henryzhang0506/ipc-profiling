@@ -1,3 +1,4 @@
+#include <gflags/gflags.h>
 #include <unistd.h>
 #include <ipc/subscriber.h>
 #include <atomic>
@@ -41,6 +42,7 @@ class Wrapper {
 };
 
 int main(int argc, char** argv) {
+  google::ParseCommandLineFlags(&argc, &argv, true);
   ros::init(argc, argv, "ros_sub");
   Wrapper w;
   ros::spin();
