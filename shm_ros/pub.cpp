@@ -1,3 +1,4 @@
+#include <gflags/gflags.h>
 #include <ipc/publisher.h>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
@@ -18,8 +19,10 @@ uint8_t* create_tmp_data(int size) {
 }
 
 int main(int argc, char** argv) {
+  google::ParseCommandLineFlags(&argc, &argv, true);
+
   ros::init(argc, argv, "ros_pub");
-  if (argc != 2) {
+  if (argc < 2) {
     printf("Usage: %s <pub_size>\n", *argv);
     return 1;
   }
