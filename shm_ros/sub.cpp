@@ -4,7 +4,7 @@
 #include <atomic>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-#include "../common.h"
+#include "common.h"
 
 double sum = 0.0;
 int cnt = 0;
@@ -12,12 +12,6 @@ int cnt = 0;
 class Wrapper {
  public:
   Wrapper() {
-    FLAGS_ipc_pubsub_report_internal_metrics = false;
-    FLAGS_ipc_pubsub_subscriber_modes = "shm";
-    FLAGS_ipc_pubsub_subscriber_protocol = "tcp";
-    FLAGS_ipc_pubsub_subscriber_tcp_nodelay = "true";
-    FLAGS_ipc_pubsub_subscriber_ros_connection_management_mode = "off";
-
     sub_ = drive::common::ipc::subscribe(n_, "ros_shm_topic", 1000, &Wrapper::callback, this);
   }
 
@@ -44,7 +38,10 @@ class Wrapper {
 int main(int argc, char** argv) {
   google::ParseCommandLineFlags(&argc, &argv, true);
   ros::init(argc, argv, "ros_sub");
+  SetupShmFlags();
+  SetupMetrics();
   Wrapper w;
   ros::spin();
+  drive::common::metrics::Registry::GetInstance()->get_forwarding_reporter()->stop();
   return 0;
 }
