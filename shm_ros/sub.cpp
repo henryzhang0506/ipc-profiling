@@ -16,6 +16,9 @@ class Wrapper {
   }
 
   void callback(const drive::common::ipc::ShmMessage& msg) {
+    if (!ros::ok()) {
+        return;
+    }
     auto transport_time_ms = (ros::WallTime::now().toNSec() - msg.publish_timestamp()) * 1.0e-6;
     printf("SHM_ROS transport time is: %lf ms\n", transport_time_ms);
     sum += transport_time_ms;
@@ -23,8 +26,8 @@ class Wrapper {
     if (cnt >= GetNumRounds()) {
       fprintf(stderr, "========= SHM_ROS mean transport time for size(%u) is: %lf ms =========\n",
               msg.payload().size(), sum / cnt);
-      //exit(0);
       ros::shutdown();
+      sub_ = {};
     }
   }
 

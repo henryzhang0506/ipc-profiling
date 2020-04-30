@@ -17,7 +17,7 @@ class Wrapper {
 
   void callback(const std_msgs::String::ConstPtr& msg) {
     drive::common::ipc::ShmMessage shm_msg;
-    if (!shm_msg.ParseFromString(msg->data)) {
+    if (!ros::ok() || !shm_msg.ParseFromString(msg->data)) {
         return;
     }
     auto transport_time_ms = (ros::WallTime::now().toNSec() - shm_msg.publish_timestamp()) * 1.0e-6;
@@ -28,6 +28,7 @@ class Wrapper {
       fprintf(stderr, "========= ROS mean transport time for size(%lu) is: %lf ms =========\n",
               shm_msg.payload().size(), sum / cnt);
       ros::shutdown();
+      sub_ = {};
     }
   }
 
