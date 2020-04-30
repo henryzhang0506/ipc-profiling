@@ -15,17 +15,14 @@ class Wrapper {
     sub_ = drive::common::ipc::subscribe(n_, "ros_shm_topic", 1000, &Wrapper::callback, this);
   }
 
-  void callback(const std_msgs::String::ConstPtr& msg) {
-    double cur_time = get_wall_time();
-    double sent_time = *((double*)(msg->data.data()));
-    int data_size = *((int*)(msg->data.data() + 8));
-    double delta = (cur_time - sent_time) * 1000;
-    printf("SHM_ROS transport time is: %lf ms\n", delta);
-    sum += delta;
+  void callback(const drive::common::ipc::ShmMessage& msg) {
+    auto transport_time_ms = (ros::WallTime::now().toNSec() - msg.publish_timestamp()) * 1.0e-6;
+    printf("SHM_ROS transport time is: %lf ms\n", transport_time_ms);
+    sum += transport_time_ms;
     cnt += 1;
     if (cnt >= GetNumRounds()) {
-      fprintf(stderr, "========= SHM_ROS mean transport time for size(%d) is: %lf ms =========\n",
-              data_size, sum / cnt);
+      fprintf(stderr, "========= SHM_ROS mean transport time for size(%u) is: %lf ms =========\n",
+              msg.payload().size(), sum / cnt);
       //exit(0);
       ros::shutdown();
     }

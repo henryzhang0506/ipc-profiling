@@ -8,16 +8,6 @@
 
 #include "common.h"
 
-const char* alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-uint8_t* create_tmp_data(int size) {
-  uint8_t* tmpBuf = new uint8_t[size];
-  for (int i = 0; i < size; ++i) {
-    tmpBuf[i] = alphanumeric[rand() % 62];
-  }
-  return tmpBuf;
-}
-
 int main(int argc, char** argv) {
   google::ParseCommandLineFlags(&argc, &argv, true);
 
@@ -31,14 +21,11 @@ int main(int argc, char** argv) {
   SetupShmFlags();
 
   int data_size = atoi(*(argv + 1));
+  auto msg = GenerateProtoMessage(data_size);
   ros::NodeHandle n;
   auto perf_pub =
-      drive::common::ipc::advertise<std_msgs::String>(n, "ros_shm_topic", 1000);
+      drive::common::ipc::advertise<decltype(msg)>(n, "ros_shm_topic", 1000);
 
-  std_msgs::String msg;
-
-  uint8_t* tmpData = create_tmp_data(data_size);
-  msg.data.resize(12 + data_size);
   // For the first round
   int round = 0;
   ros::Rate loop_rate(GetFrequencyHZ());
@@ -48,11 +35,8 @@ int main(int argc, char** argv) {
     if (round >= GetNumRounds() + 100) {
       ros::shutdown();
     }
-    std::memcpy(&msg.data[8], &data_size, 4);
-    std::memcpy(&msg.data[12], tmpData, data_size);
 
-    double current_time = get_wall_time();
-    std::memcpy(&msg.data[0], &current_time, 8);
+    msg.set_publish_timestamp(ros::WallTime::now().toNSec());
 
     perf_pub.publish(msg);
     round += 1;

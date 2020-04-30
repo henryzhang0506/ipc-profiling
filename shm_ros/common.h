@@ -2,6 +2,7 @@
 
 #include <gflags/gflags.h>
 
+#include <common/ipc/shm_message.pb.h>
 #include <ipc/flags.h>
 #include <metrics/latency_aggregator_reporter.h>
 #include <metrics/registry.h>
@@ -27,3 +28,15 @@ static void SetupShmFlags() {
   FLAGS_ipc_pubsub_subscriber_tcp_nodelay = "true";
 }
 
+static drive::common::ipc::ShmMessage
+GenerateProtoMessage(size_t payload_size) {
+    const auto alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const auto alphabet_size = strlen(alphabet);
+    drive::common::ipc::ShmMessage msg;
+    auto& payload = *msg.mutable_payload();
+    payload.resize(payload_size);
+    for (auto& c : payload) {
+        c = alphabet[rand() % alphabet_size];
+    }
+    return msg;
+}
