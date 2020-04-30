@@ -19,11 +19,42 @@ static void SetupMetrics() {
 
 static void SetupShmFlags() {
   FLAGS_ipc_pubsub_report_internal_metrics = true;
-  FLAGS_ipc_pubsub_publisher_modes = "shm";
-  FLAGS_ipc_pubsub_publisher_force_outgoing_queue_flush = true;
+
+  FLAGS_ipc_pubsub_publisher_modes = []() {
+      if (const char * env_val = getenv("IPC_PUBSUB_PUBLISHER_MODES")) {
+          return env_val;
+      } else {
+          return "shm";
+      }
+  }();
+
+  FLAGS_ipc_pubsub_publisher_use_shm_allocators = []() {
+      if (const char * env_val = getenv("IPC_PUBSUB_PUBLISHER_USE_SHM_ALLOCATORS")) {
+          return env_val == std::string("1") || env_val == std::string("true");
+      } else {
+          return true;
+      }
+  }();
+
+  FLAGS_ipc_pubsub_publisher_force_outgoing_queue_flush = []() {
+      if (const char * env_val = getenv("IPC_PUBSUB_PUBLISHER_FORCE_OUTGOING_QUEUE_FLUSH")) {
+          return env_val == std::string("1") || env_val == std::string("true");
+      } else {
+          return true;
+      }
+  }();
+
+
   FLAGS_ipc_pubsub_subscriber_ros_connection_management_mode = "off";
 
-  FLAGS_ipc_pubsub_subscriber_modes = "shm";
+  FLAGS_ipc_pubsub_subscriber_modes = []() {
+      if (const char * env_val = getenv("IPC_PUBSUB_SUBSCRIBER_MODES")) {
+          return env_val;
+      } else {
+          return "shm";
+      }
+  }();
+
   FLAGS_ipc_pubsub_subscriber_protocol = "tcp";
   FLAGS_ipc_pubsub_subscriber_tcp_nodelay = "true";
 }
