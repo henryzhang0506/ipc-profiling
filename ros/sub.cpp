@@ -1,6 +1,6 @@
 #include <unistd.h>
 #include <atomic>
-#include "../common.h"
+#include "common.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
@@ -16,17 +16,19 @@ class Wrapper {
   }
 
   void callback(const std_msgs::String::ConstPtr& msg) {
-    double cur_time = get_wall_time();
-    double sent_time = *((double*)(msg->data.data()));
-    int data_size = *((int*)(msg->data.data() + 8));
-    double delta = (cur_time - sent_time) * 1000;
-    printf("ROS transport time is: %lf ms\n", delta);
-    sum += delta;
+    drive::common::ipc::ShmMessage shm_msg;
+    if (!ros::ok() || !shm_msg.ParseFromString(msg->data)) {
+        return;
+    }
+    auto transport_time_ms = (ros::WallTime::now().toNSec() - shm_msg.publish_timestamp()) * 1.0e-6;
+    printf("ROS transport time is: %lf ms\n", transport_time_ms);
+    sum += transport_time_ms;
     cnt += 1;
     if (cnt > GetNumRounds()) {
-      fprintf(stderr, "========= ROS mean transport time for size(%d) is: %lf ms =========\n",
-              data_size, sum / cnt);
+      fprintf(stderr, "========= ROS mean transport time for size(%lu) is: %lf ms =========\n",
+              shm_msg.payload().size(), sum / cnt);
       ros::shutdown();
+      sub_ = {};
     }
   }
 
